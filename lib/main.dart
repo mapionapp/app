@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:w27/routes/home.dart';
+import 'package:w27/routes/init.dart';
 
 import 'adaptive.dart';
 
@@ -30,7 +30,7 @@ class MainState extends State<Main> {
         Locale('de')
       ],
       builder: Adaptive.getBehaviour(context),
-      home: Home()
+      home: Init()
     );
   }
 }
