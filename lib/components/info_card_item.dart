@@ -1,39 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:w27/language/language.dart';
+import 'package:w27/routes/comment_page.dart';
 
 import '../w27_colors.dart';
 
 class InfoCardItem extends StatelessWidget {
 
   final String name;
+  final String address;
   final String distance;
-  final bool isOpen;
-  final bool isFavorite;
 
-  const InfoCardItem({Key key, this.name, this.distance, this.isFavorite, this.isOpen}) : super(key: key);
+  const InfoCardItem({Key key, this.name, this.distance, this.address}) : super(key: key);
 
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 100,
-      width: 200,
-      margin: EdgeInsets.symmetric(horizontal: 5, vertical: 7),
-      decoration: BoxDecoration(
-        color: W27Colors.primaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(10))
+    return InkWell(
+      child: Container(
+        height: 100,
+        width: 200,
+        margin: EdgeInsets.symmetric(horizontal: 8, vertical: 7),
+        decoration: BoxDecoration(
+          color: W27Colors.primaryColor,
+          borderRadius: BorderRadius.all(Radius.circular(10))
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
+              child: Text(name, style: TextStyle(color: Colors.white, fontSize: 22),),
+            ),
+            MetaInfoRow(icon: Icons.location_on, text: address,),
+            MetaInfoRow(icon: Icons.directions, text: distance,),
+          ],
+        ),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 3, horizontal: 5),
-            child: Text(name, style: TextStyle(color: Colors.white, fontSize: 22),),
-          ),
-          MetaInfoRow(icon: Icons.directions, text: distance,),
-          MetaInfoRow(icon: Icons.access_time, text: isOpen ? t('infoCard.open') : t('infoCard.closed'),),
-        ],
-      ),
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => CommentPage()));
+      },
     );
   }
 }
