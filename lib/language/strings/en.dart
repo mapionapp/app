@@ -1,3 +1,7 @@
 const Map<String, dynamic> en = {
-  "hello": "Hello World"
+  "hello": "Hello World",
+  'infoCard': {
+    'nearYou': 'Near You',
+    'openGrocerieStores': 'Open Grocerie-Stores'
+  }
 };

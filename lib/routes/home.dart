@@ -3,6 +3,7 @@ import 'package:w27/components/general_info_card.dart';
 import 'package:w27/components/map.dart';
 import 'package:w27/components/popup.dart';
 import 'package:w27/language/language.dart';
+import 'package:w27/w27_colors.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.green,
+        backgroundColor: W27Colors.primaryColor,
         title: Text('W27'),
       ),
       body: Stack(
