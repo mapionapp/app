@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:w27/api.dart';
 
 class CoronaMap extends StatefulWidget {
   @override
@@ -27,8 +28,12 @@ class _CoronaMapState extends State<CoronaMap> {
       setState(() {
         currentLocation = CameraPosition(
           target: LatLng(locationData.latitude, locationData.longitude),
-          zoom: 20
+          zoom: 15
         );
+
+        API.getMetaData('ChIJN1t_tDeuEmsRUsoyG83frY4').then((data) {
+          print(data);
+        });
 
         _controller.future.then((controller) {
           controller.animateCamera(CameraUpdate.newCameraPosition(currentLocation));
@@ -41,14 +46,12 @@ class _CoronaMapState extends State<CoronaMap> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      body: GoogleMap(
-        mapType: MapType.normal,
-        initialCameraPosition: currentLocation,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      )
+    return GoogleMap(
+      mapType: MapType.normal,
+      initialCameraPosition: currentLocation,
+      onMapCreated: (GoogleMapController controller) {
+        _controller.complete(controller);
+      }
     );
   }
 }
