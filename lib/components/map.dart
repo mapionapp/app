@@ -33,8 +33,8 @@ class _CoronaMapState extends State<CoronaMap> {
           zoom: 15
         );
 
-        API.getMetaData('ChIJN1t_tDeuEmsRUsoyG83frY4').then((data) {
-          print(data);
+        API.getPlaces(121.3123, 41.12312).then((data) {
+          //print(data);
         });
 
         _controller.future.then((controller) {
