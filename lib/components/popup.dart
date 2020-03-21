@@ -4,8 +4,8 @@ class Popup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 56,
-      width: 81,
+      width: 200,
+      height: 100,
       color: Colors.greenAccent,
       child: Icon(Icons.delete),
     );
