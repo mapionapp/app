@@ -1,16 +1,23 @@
-# w27
+# W27
 
-Corona Virus
+Corona Map
 
-## Getting Started
+## Test
 
-This project is a starting point for a Flutter application.
+open any simulator or connect a mobile device via USB
 
-A few resources to get you started if this is your first Flutter project:
+run `flutter run`
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Deploy
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Android
+
+run `flutter build appbundle`
+
+### iOS
+
+run `flutter build ios`
+
+in Xcode select target `Generic iOS Device`
+
+in Xcode run `Product` > `Archive`
