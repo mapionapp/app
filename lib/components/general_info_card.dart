@@ -10,55 +10,59 @@ class GeneralInfoCard extends StatefulWidget {
 class _GeneralInfoCardState extends State<GeneralInfoCard> {
   
   bool opened = false;
+
+  List<Widget> getChildren() {
+    if(opened) {
+      return [
+        FlatButton(
+          onPressed: () {
+            setState(() {
+              opened = false;
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Icon(Icons.keyboard_arrow_down, size: 50,),
+          ),
+        ),
+        SizedBox(height: 15,),
+        InfoCardRow(title: t('infoCard.nearYou'),),
+        SizedBox(height: 30,),
+        InfoCardRow(title: t('infoCard.openGrocerieStores'),),
+        SizedBox(height: 30,),
+      ];
+    } else {
+      return [
+        FlatButton(
+          onPressed: () {
+            setState(() {
+              opened = true;
+            });
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Icon(Icons.keyboard_arrow_up, size: 50,),
+          ),
+        ),
+        SizedBox(height: 15,),
+      ];
+    }
+  }
   
   @override
   Widget build(BuildContext context) {
 
     double height = MediaQuery.of(context).size.height;
 
-    if(opened) {
-      return Container(
-        width: double.infinity,
-        height: height * 0.6,
-        color: Colors.orange,
-        child: FlatButton(
-          child: Column(
-            children: [
-              SizedBox(height: 15,),
-              Icon(Icons.keyboard_arrow_down, size: 50,),
-              InfoCardRow(title: t('infoCard.nearYou'),),
-              SizedBox(height: 30,),
-              InfoCardRow(title: t('infoCard.openGrocerieStores'),),
-            ],
-          ),
-          color: Colors.white,
-          onPressed: () {
-            setState(() {
-              opened = false;
-            });
-        },
-        ),
-      );
-    } else {
-      return Container(
-        width: double.infinity,
-        height: 100,
-        color: Colors.orange,
-        child: FlatButton(
-          child: Column(
-            children: [
-              SizedBox(height: 15,),
-              Icon(Icons.keyboard_arrow_up, size: 50,),
-            ],
-          ),
-          color: Colors.white,
-          onPressed: () {
-            setState(() {
-              opened = true;
-            });
-          },
-        ),
-      );
-    }
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeInOutCubic,
+      width: double.infinity,
+      height: opened ? height * 0.6 : 80,
+      color: Colors.white,
+      child: ListView(
+        children: getChildren(),
+      ),
+    );
   }
 }
