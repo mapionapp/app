@@ -15,16 +15,15 @@ class InfoCardRow extends StatelessWidget {
 
     return Container(
       width: width,
-      height: 200,
-      decoration: BoxDecoration(
-          //color: W27Colors.secondaryColor,
-          borderRadius: BorderRadius.all(Radius.circular(20))
-      ),
+      height: 250,
       padding: EdgeInsets.all(10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: TextStyle(color: Colors.black, fontSize: 24),),
+          Padding(
+            padding: const EdgeInsets.all(7.5),
+            child: Text(title, style: TextStyle(color: Colors.black, fontSize: 24),),
+          ),
           Expanded(
             child: ListView(
               scrollDirection: Axis.horizontal,

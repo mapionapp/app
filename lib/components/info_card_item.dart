@@ -18,9 +18,10 @@ class InfoCardItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        height: 100,
+        height: 500,
         width: 200,
         margin: EdgeInsets.symmetric(horizontal: 8, vertical: 7),
+        padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
         decoration: BoxDecoration(
           color: W27Colors.primaryColor,
           borderRadius: BorderRadius.all(Radius.circular(10))
@@ -34,6 +35,8 @@ class InfoCardItem extends StatelessWidget {
             ),
             MetaInfoRow(icon: Icons.location_on, text: address,),
             MetaInfoRow(icon: Icons.directions, text: distance,),
+            SizedBox(height: 10,),
+            TagRow(tags: ['Pasta', 'Toilet paper', 'Queue', 'open'],)
           ],
         ),
       ),
@@ -65,3 +68,29 @@ class MetaInfoRow extends StatelessWidget {
     );
   }
 }
+
+class TagRow extends StatelessWidget {
+
+  final List<String> tags;
+
+  const TagRow({Key key, this.tags}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Wrap(
+      //scrollDirection: Axis.horizontal,
+      children: tags.map((tag){
+        return Container(
+          padding: EdgeInsets.symmetric(vertical: 3, horizontal: 6),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(10))
+          ),
+          margin: EdgeInsets.all(3),
+          child: Text(tag),
+        );
+      }).toList(),
+    );
+  }
+}
+
