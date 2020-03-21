@@ -55,7 +55,7 @@ class _CoronaMapState extends State<CoronaMap> {
         _controller.complete(controller);
       },
       onTap: (LatLng position) {
-        print(position);
+        API.getPlaces(position.latitude, position.longitude);
         Popups.generic(
           context: context,
           height: 400,

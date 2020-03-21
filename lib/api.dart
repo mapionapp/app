@@ -5,7 +5,7 @@ import 'package:http/http.dart';
 import 'package:w27/data/metadata.dart';
 
 class API {
-  static const String URL = 'https://w27-wvs.herokuapp.com';
+  static const String URL = 'https://w27-wvs.alexdev.de/';
   
   static Future<Response> doGet(String route) {
     return get('$URL/$route');
@@ -22,6 +22,16 @@ class API {
       },
       body: body
     );
+  }
+
+  static Future<void> getPlaces(double lat, double lng) async {
+    //Response response = await doGet('v1/place/$lat/$lng');
+    //List<dynamic> places = json.decode(response.body);
+    //print(places);
+    //return metadata.map((d) => MetaData.fromMap(d)).toList();
+    return [
+
+    ];
   }
 
   static Future<List<MetaData>> getMetaData(String placeID) async {
