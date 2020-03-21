@@ -15,7 +15,11 @@ class InfoCardRow extends StatelessWidget {
     return Container(
       width: width,
       height: 200,
-      color: W27Colors.secondaryColor,
+      decoration: BoxDecoration(
+          color: W27Colors.secondaryColor,
+          borderRadius: BorderRadius.all(Radius.circular(20))
+      ),
+      padding: EdgeInsets.all(10),
       child: ListView(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
