@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
 import 'package:w27/api.dart';
+import 'package:w27/components/place_card.dart';
+import 'package:w27/helper/popups.dart';
 
 class CoronaMap extends StatefulWidget {
   @override
@@ -51,7 +53,21 @@ class _CoronaMapState extends State<CoronaMap> {
       initialCameraPosition: currentLocation,
       onMapCreated: (GoogleMapController controller) {
         _controller.complete(controller);
-      }
+      },
+      onTap: (LatLng position) {
+        print(position);
+        Popups.generic(
+          context: context,
+          height: 400,
+          content: PlaceCard(
+            title: 'Edeka',
+            address: ['Berliner Chaussee 37', 'Berlin'],
+            isOpened: true,
+            usage: Level.HIGH,
+            shortages: ['Klopapier', 'Nudeln'],
+          )
+        );
+      },
     );
   }
 }
