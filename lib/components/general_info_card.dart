@@ -57,7 +57,7 @@ class _GeneralInfoCardState extends State<GeneralInfoCard> {
       duration: const Duration(milliseconds: 400),
       curve: Curves.easeInOutCubic,
       width: double.infinity,
-      height: opened ? height * 0.6 : 80,
+      height: opened ? height * 0.6 : Theme.of(context).platform == TargetPlatform.iOS ? 100 : 80,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20))
