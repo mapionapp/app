@@ -1,8 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:w27/language/language.dart';
 import 'package:w27/routes/comment_page.dart';
+import 'package:w27/w27_colors.dart';
 
-import '../w27_colors.dart';
 
 class InfoCardItem extends StatelessWidget {
 
@@ -37,7 +38,7 @@ class InfoCardItem extends StatelessWidget {
         ),
       ),
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => CommentPage()));
+        Navigator.push(context, CupertinoPageRoute(builder: (context) => CommentPage()));
       },
     );
   }
