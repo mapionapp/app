@@ -33,10 +33,6 @@ class _CoronaMapState extends State<CoronaMap> {
           zoom: 15
         );
 
-        API.getPlaces(121.3123, 41.12312).then((data) {
-          //print(data);
-        });
-
         _controller.future.then((controller) {
           controller.animateCamera(CameraUpdate.newCameraPosition(currentLocation));
         });
@@ -55,7 +51,10 @@ class _CoronaMapState extends State<CoronaMap> {
         _controller.complete(controller);
       },
       onTap: (LatLng position) {
-        API.getPlaces(position.latitude, position.longitude);
+        print('POS: $position');
+        API.getPlaces(121.3123, 41.12312).then((data) {
+          print(data);
+        });
         Popups.generic(
           context: context,
           height: 400,
