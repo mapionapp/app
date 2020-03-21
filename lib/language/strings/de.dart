@@ -3,5 +3,7 @@ const Map<String, dynamic> de = {
   'infoCard': {
     'nearYou': 'In deiner Nähe',
     'openGrocerieStores': 'Geöffnete Supermärkte',
+    'open': 'geöffnet',
+    'closed': 'geschlossen',
   }
 };
