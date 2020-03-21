@@ -25,7 +25,6 @@ class _GeneralInfoCardState extends State<GeneralInfoCard> {
             child: Icon(Icons.keyboard_arrow_down, size: 50,),
           ),
         ),
-        SizedBox(height: 15,),
         InfoCardRow(title: t('infoCard.nearYou'),),
         SizedBox(height: 30,),
         InfoCardRow(title: t('infoCard.openGrocerieStores'),),
@@ -59,7 +58,10 @@ class _GeneralInfoCardState extends State<GeneralInfoCard> {
       curve: Curves.easeInOutCubic,
       width: double.infinity,
       height: opened ? height * 0.6 : 80,
-      color: Colors.white,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20))
+      ),
       child: ListView(
         children: getChildren(),
       ),
