@@ -37,7 +37,7 @@ class InfoCardItem extends StatelessWidget {
             MetaInfoRow(icon: Icons.location_on, text: address,),
             MetaInfoRow(icon: Icons.directions, text: distance,),
             SizedBox(height: 10,),
-            TagRow(tags: ['Pasta', 'Toilet paper', 'Queue', 'open'],)
+            TagRow(tags: ['Pasta', 'Toilet paper', 'Queue', 'Open'],)
           ],
         ),
       ),
@@ -94,7 +94,7 @@ class TagRow extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10))
           ),
           margin: EdgeInsets.all(3),
-          child: Text(tag),
+          child: Text('#$tag'),
         );
       }).toList(),
     );
