@@ -2,6 +2,7 @@ const Map<String, dynamic> de = {
   "hello": "Hallo Welt",
   'open': 'geöffnet',
   'closed': 'geschlossen',
+  'loading': 'Lade Daten...',
   'level': {
     'low': 'gering',
     'medium': 'normal',
@@ -14,8 +15,10 @@ const Map<String, dynamic> de = {
     'closed': 'geschlossen',
   },
   'placeInfo': {
-    'usage': 'Auslastung: ',
-    'shortages': 'Mangel an: ',
-    'rate': 'Diesen Ort bewerten'
+    'selectPlace': 'Bitte wähle eine Location aus:',
+    'unknown': 'Unbekannt',
+    'rate': 'Diesen Ort bewerten',
+    'comment': 'Kommentieren',
+    'tags': 'Tags'
   }
 };

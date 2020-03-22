@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:w27/api.dart';
-import 'package:w27/components/place_card.dart';
+import 'package:w27/components/place/place_card.dart';
 import 'package:w27/helper/popups.dart';
 
 class CoronaMap extends StatefulWidget {
@@ -51,19 +50,12 @@ class _CoronaMapState extends State<CoronaMap> {
         _controller.complete(controller);
       },
       onTap: (LatLng position) {
-        print('POS: $position');
-        API.getPlaces(121.3123, 41.12312).then((data) {
-          print(data);
-        });
         Popups.generic(
           context: context,
           height: 400,
           content: PlaceCard(
-            title: 'Edeka',
-            address: ['Berliner Chaussee 37', 'Berlin'],
-            isOpened: true,
-            usage: Level.HIGH,
-            shortages: ['Klopapier', 'Nudeln'],
+            lat: position.latitude,
+            lng: position.longitude
           )
         );
       },

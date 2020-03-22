@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:w27/routes/init.dart';
+import 'package:w27/w27_colors.dart';
 
 import 'adaptive.dart';
 
@@ -30,6 +31,7 @@ class MainState extends State<Main> {
         Locale('de')
       ],
       builder: Adaptive.getBehaviour(context),
+      theme: Theme.of(context).copyWith(accentColor: W27Colors.primaryColor),
       home: Init()
     );
   }
