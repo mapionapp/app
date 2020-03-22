@@ -15,11 +15,11 @@ class API {
     return get('$URL/$route');
   }
 
-  static Future<Response> doPut(String route, Map<String, dynamic> data) {
+  static Future<Response> doPost(String route, Map<String, dynamic> data) {
 
     var body = json.encode(data);
     print('PUT REQUEST: $URL/$route | data: $data');
-    return put(
+    return post(
       '$URL/$route',
       headers: {
         'content-type': 'application/json'
@@ -117,7 +117,7 @@ class API {
   }
 
   static Future<void> comment(String placeID, String comment, List<Tag> tags) async {
-    await doPut('v1/place/$placeID/comment', {
+    await doPost('v1/place/$placeID/comment', {
       'content': comment,
       'tags': tags.map((tag) => tag.id).toList()
     });
