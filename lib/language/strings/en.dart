@@ -18,6 +18,7 @@ const Map<String, dynamic> en = {
     'selectPlace': 'Please select a location:',
     'unknown': 'Unknown',
     'comment': 'Comment',
-    'tags': 'Tags'
+    'tags': 'Tags',
+    'tagsHelp': 'Separate tags with spaces'
   }
 };

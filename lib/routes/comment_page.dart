@@ -156,6 +156,11 @@ class _CommentPageState extends State<CommentPage> {
                       focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 2))
                     ),
                   ),
+                  SizedBox(height: 10),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(t('placeInfo.tagsHelp'), style: TextStyle(color: Colors.grey, fontStyle: FontStyle.italic)),
+                  ),
                   SizedBox(height: 50),
                   FlatButton(
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
