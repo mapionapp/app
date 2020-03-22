@@ -20,17 +20,30 @@ class CommentPage extends StatefulWidget {
 
 class _CommentPageState extends State<CommentPage> {
 
+  TextEditingController tagController;
+
   String comment;
-  String tagsRaw;
+  String tagsRaw = '';
   List<Tag> tags = [];
   List<Tag> suggestions = [];
 
+
+  @override
+  void initState() {
+    super.initState();
+    tagController = new TextEditingController();
+  }
+
   Future<void> updateSuggestions() async {
-    if(tagsRaw.isNotEmpty) {
+    if(canFetchTags()) {
       suggestions = await API.getTags(tagsRaw);
       suggestions = suggestions.where((s) => tags.every((tag) => tag.label != s.label)).toList(); // remove added tags
       setState(() {});
     }
+  }
+
+  bool canFetchTags() {
+    return tagsRaw.isNotEmpty && !tagsRaw.contains(' ');
   }
 
   @override
@@ -119,12 +132,22 @@ class _CommentPageState extends State<CommentPage> {
                   ),
                   SizedBox(height: 5),
                   TextFormField(
+                    controller: tagController,
                     onChanged: (input) async {
                       setState(() {
                         tagsRaw = input;
-                        if(input.isEmpty)
+
+                        if(tagsRaw.endsWith(' ')) {
+                          tags.add(Tag(tagsRaw.trim()));
+                          tagsRaw = '';
+                          tagController.clear();
+                        }
+
+                        if(!canFetchTags()) {
                           suggestions = [];
+                        }
                       });
+
                       await updateSuggestions();
                     },
                     decoration: InputDecoration(
