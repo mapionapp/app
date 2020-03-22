@@ -4,6 +4,7 @@ import 'package:w27/components/place/place_card.dart';
 import 'package:w27/data/place.dart';
 import 'package:w27/data/tag.dart';
 import 'package:w27/language/language.dart';
+import 'package:w27/main.dart';
 import 'package:w27/w27_colors.dart';
 
 class CommentPage extends StatefulWidget {
@@ -37,7 +38,7 @@ class _CommentPageState extends State<CommentPage> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: W27Colors.primaryColor,
-          title: Text('W27'),
+          title: Text(APP_NAME),
         ),
         body: ListView(
           children: [

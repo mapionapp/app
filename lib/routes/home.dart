@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:w27/components/general_info_card.dart';
 import 'package:w27/components/map.dart';
+import 'package:w27/main.dart';
 import 'package:w27/w27_colors.dart';
 
 class Home extends StatefulWidget {
@@ -14,7 +15,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: W27Colors.primaryColor,
-        title: Text('W27'),
+        title: Text(APP_NAME),
       ),
       body: Stack(
         children: [

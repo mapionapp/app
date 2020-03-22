@@ -5,6 +5,8 @@ import 'package:w27/w27_colors.dart';
 
 import 'adaptive.dart';
 
+const APP_NAME = 'Mapion';
+
 void main() => runApp(Main());
 
 class Main extends StatefulWidget {
@@ -18,7 +20,7 @@ class MainState extends State<Main> {
   Widget build(BuildContext context) {
 
     return MaterialApp(
-      title: 'W27',
+      title: APP_NAME,
       color: Colors.black,
       debugShowCheckedModeBanner: false,
       localizationsDelegates: [
