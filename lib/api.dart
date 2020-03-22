@@ -111,7 +111,7 @@ class API {
   }
 
   static Future<List<Tag>> getTags(String query) async {
-    Response response = await doGet('v1/tags/$query');
+    Response response = await doGet('v1/tags?query=$query');
     List<dynamic> tags = json.decode(response.body);
     return tags.map((tag) => _parseTag(tag as Map<String, dynamic>)).toList();
   }
@@ -119,7 +119,7 @@ class API {
   static Future<void> comment(String placeID, String comment, List<Tag> tags) async {
     await doPost('v1/place/$placeID/comment', {
       'content': comment,
-      'tags': tags.map((tag) => tag.id).toList()
+      'tags': tags.map((tag) => tag.label).toList()
     });
   }
 
