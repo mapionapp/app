@@ -49,7 +49,6 @@ class InfoCardItem extends StatelessWidget {
             place: Place('test', name, address, []),
           )
         );
-        //Navigator.push(context, CupertinoPageRoute(builder: (context) => CommentPage()));
       },
     );
   }

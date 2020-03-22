@@ -29,7 +29,7 @@ class _CoronaMapState extends State<CoronaMap> {
       setState(() {
         currentLocation = CameraPosition(
           target: LatLng(locationData.latitude, locationData.longitude),
-          zoom: 15
+          zoom: 17
         );
 
         _controller.future.then((controller) {

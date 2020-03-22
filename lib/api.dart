@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:w27/data/comment.dart';
 import 'package:w27/data/place.dart';
+import 'package:w27/data/tag.dart';
 import 'package:w27/helper/sleep.dart';
 
 class API {
@@ -109,10 +110,16 @@ class API {
     return _parsePlace(map);
   }
 
-  static Future<void> comment(String placeID, String comment, List<String> tags) async {
-    Response response = await doPut('v1/place/$placeID/comment', {
+  static Future<List<Tag>> getTags(String query) async {
+    Response response = await doGet('v1/tags/$query');
+    List<dynamic> tags = json.decode(response.body);
+    return tags.map((tag) => _parseTag(tag as Map<String, dynamic>)).toList();
+  }
+
+  static Future<void> comment(String placeID, String comment, List<Tag> tags) async {
+    await doPut('v1/place/$placeID/comment', {
       'content': comment,
-      'tags': tags
+      'tags': tags.map((tag) => tag.id).toList()
     });
   }
 
@@ -121,10 +128,13 @@ class API {
     List<Comment> comments = commentsRaw.map((c) {
       Map<String, dynamic> map = c as Map;
       List<dynamic> tagsRaw = map['tags'];
-      print('RAW: $tagsRaw');
-      List<String> tags = tagsRaw.map((t) => t as String).toList();
+      List<Tag> tags = tagsRaw.map((tag) => _parseTag(tag as Map<String, dynamic>)).toList();
       return Comment(map['content'], tags);
     }).toList();
     return Place(map['placeId'], map['name'], map['vicinity'], comments);
+  }
+
+  static Tag _parseTag(Map<String, dynamic> map) {
+    return Tag(map['id'], map['label']);
   }
 }

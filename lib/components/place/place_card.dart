@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:w27/api.dart';
 import 'package:w27/data/place.dart';
 import 'package:w27/language/language.dart';
+import 'package:w27/routes/comment_page.dart';
 import 'package:w27/w27_colors.dart';
 
 enum Level { LOW, MED, HIGH }
@@ -22,14 +23,8 @@ class PlaceCard extends StatefulWidget {
 class _PlaceCardState extends State<PlaceCard> {
 
   bool loading = true;
-  bool commentMode = false;
   List<Place> places;
   Place selectedPlace;
-
-  // comment mode
-  String comment;
-  String tagsRaw;
-  List<String> tags = [];
 
   @override
   void initState() {
@@ -75,71 +70,7 @@ class _PlaceCardState extends State<PlaceCard> {
         )
       ];
     } else {
-      if(commentMode) {
-
-        return [
-          Text(selectedPlace.name, style: TextStyle(fontSize: 30)),
-          PlaceInfoRow(icon: Icons.location_on, info: selectedPlace.address ?? t('placeCard.unknown')),
-          SizedBox(height: 20),
-          Text(t('placeInfo.comment'), style: TextStyle(),),
-          SizedBox(height: 5),
-          TextFormField(
-            maxLines: 3,
-            onChanged: (input) {
-              comment = input;
-            },
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 2)),
-              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 2))
-            ),
-          ),
-          SizedBox(height: 20),
-          Text(t('placeInfo.tags'), style: TextStyle(),),
-          SizedBox(height: 5),
-          TextFormField(
-            onChanged: (input) async {
-              setState(() {
-                comment = input;
-              });
-            },
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 10),
-              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 2)),
-              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey, width: 2))
-            ),
-          ),
-          Expanded(child: Container()),
-          FlatButton(
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
-            color: W27Colors.primaryColor,
-            onPressed: () {
-              setState(() {
-                loading = true;
-                API.comment(selectedPlace.id, comment, tags).then((_) async {
-                  selectedPlace = await API.getPlace(selectedPlace.id); // update place
-                  setState(() {
-                    loading = false;
-                    commentMode = false;
-                  });
-                });
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.star, size: 30, color: Colors.white),
-                  SizedBox(width: 10),
-                  Text(t('placeInfo.rate'), style: TextStyle(fontSize: 20, color: Colors.white))
-                ]
-              ),
-            ),
-          )
-        ];
-
-      } else if(selectedPlace != null) {
+      if(selectedPlace != null) {
 
         // SHOW ONE PLACE
 
@@ -168,7 +99,7 @@ class _PlaceCardState extends State<PlaceCard> {
                             color: W27Colors.secondaryColor,
                             borderRadius: BorderRadius.all(Radius.circular(10))
                           ),
-                          child: Text('#$tag', style: TextStyle(color: Colors.white)),
+                          child: Text('#${tag.label}', style: TextStyle(color: Colors.white)),
                         );
                       }).toList()
                     ],
@@ -181,11 +112,18 @@ class _PlaceCardState extends State<PlaceCard> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
             color: W27Colors.primaryColor,
             onPressed: () {
-              setState(() {
-                comment = null;
-                tags = [];
-                commentMode = true;
-              });
+              Navigator.push(context, CupertinoPageRoute(builder: (context) => CommentPage(
+                place: selectedPlace,
+                callback: (comment, tags) {
+                  loading = true;
+                  API.comment(selectedPlace.id, comment, tags).then((_) async {
+                    selectedPlace = await API.getPlace(selectedPlace.id); // update place
+                    setState(() {
+                      loading = false;
+                    });
+                  });
+                },
+              )));
             },
             child: Padding(
               padding: const EdgeInsets.all(10),
