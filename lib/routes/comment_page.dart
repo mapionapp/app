@@ -28,7 +28,7 @@ class _CommentPageState extends State<CommentPage> {
   Future<void> updateSuggestions() async {
     if(tagsRaw.isNotEmpty) {
       suggestions = await API.getTags(tagsRaw);
-      suggestions = suggestions.where((s) => tags.every((tag) => tag.id != s.id)).toList(); // remove added tags
+      suggestions = suggestions.where((s) => tags.every((tag) => tag.label != s.label)).toList(); // remove added tags
       setState(() {});
     }
   }
@@ -75,7 +75,7 @@ class _CommentPageState extends State<CommentPage> {
                         return InkWell(
                           onTap: () async {
                             setState(() {
-                              tags = tags.where((existing) => existing != tag).toList();
+                              tags = tags.where((existing) => existing.label != tag.label).toList();
                             });
                             await updateSuggestions();
                           },
