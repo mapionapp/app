@@ -46,7 +46,7 @@ class InfoCardItem extends StatelessWidget {
           context: context,
           height: 400,
           content: PlaceCard(
-            place: Place('test', name, address, []),
+            place: Place(null, name, address, []),
           )
         );
       },

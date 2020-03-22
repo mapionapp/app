@@ -17,7 +17,6 @@ const Map<String, dynamic> en = {
   'placeInfo': {
     'selectPlace': 'Please select a location:',
     'unknown': 'Unknown',
-    'rate': 'Rate this location',
     'comment': 'Comment',
     'tags': 'Tags'
   }

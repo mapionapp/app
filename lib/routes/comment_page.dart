@@ -147,9 +147,9 @@ class _CommentPageState extends State<CommentPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.star, size: 30, color: Colors.white),
+                          Icon(Icons.edit, size: 30, color: Colors.white),
                           SizedBox(width: 10),
-                          Text(t('placeInfo.rate'), style: TextStyle(fontSize: 20, color: Colors.white))
+                          Text(t('placeInfo.comment'), style: TextStyle(fontSize: 20, color: Colors.white))
                         ]
                       ),
                     ),

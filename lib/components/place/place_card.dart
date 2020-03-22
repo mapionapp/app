@@ -36,6 +36,8 @@ class _PlaceCardState extends State<PlaceCard> {
       loading = false;
     } else {
       API.getPlaces(widget.lat, widget.lng).then((data) {
+        if(!mounted)
+          return;
         setState(() {
           loading = false;
           places = data;
@@ -112,6 +114,8 @@ class _PlaceCardState extends State<PlaceCard> {
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50.0)),
             color: W27Colors.primaryColor,
             onPressed: () {
+              if(selectedPlace == null || selectedPlace.id == null)
+                return;
               Navigator.push(context, CupertinoPageRoute(builder: (context) => CommentPage(
                 place: selectedPlace,
                 callback: (comment, tags) {
@@ -130,9 +134,9 @@ class _PlaceCardState extends State<PlaceCard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.star, size: 30, color: Colors.white),
+                  Icon(Icons.edit, size: 30, color: Colors.white),
                   SizedBox(width: 10),
-                  Text(t('placeInfo.rate'), style: TextStyle(fontSize: 20, color: Colors.white))
+                  Text(t('placeInfo.comment'), style: TextStyle(fontSize: 20, color: Colors.white))
                 ]
               ),
             ),
@@ -158,16 +162,24 @@ class _PlaceCardState extends State<PlaceCard> {
                         selectedPlace = p;
                       });
                     },
-                    child: Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Icon(Icons.location_on, size: 30, color: Colors.white),
-                          SizedBox(width: 10),
-                          Text(p.name, style: TextStyle(fontSize: 20, color: Colors.white))
-                        ]
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.location_on, size: 30, color: Colors.white),
+                        SizedBox(width: 10),
+                        Expanded(
+                          child: SizedBox(
+                            height: 50,
+                            child: ListView(
+                              scrollDirection: Axis.horizontal,
+                              shrinkWrap: true,
+                              children: [
+                                Center(child: Text(p.name, style: TextStyle(fontSize: 20, color: Colors.white))),
+                              ],
+                            ),
+                          ),
+                        )
+                      ]
                     ),
                   ),
                 );
