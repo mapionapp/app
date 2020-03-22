@@ -8,7 +8,7 @@ import 'package:w27/data/tag.dart';
 import 'package:w27/helper/sleep.dart';
 
 class API {
-  static const String URL = 'https://w27-wvs.alexdev.de';
+  static const String URL = 'https://api.mapion.de';
   
   static Future<Response> doGet(String route) {
     print('GET REQUEST: $URL/$route');
